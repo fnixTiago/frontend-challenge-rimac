@@ -11,38 +11,6 @@ import PrivateRoute from './Routes/PrivateRoute';
 import { UserProvider } from './context/UserContext';
 import "./styles/index.css"
 import Router from './Routes/Routes';
-
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <Home />,
-//   },
-//   {
-//     path: '/home',
-//     element: <Home />,
-//   },
-//   {
-//     path: '/register-plan',
-//     element: (
-//       <PrivateRoute>
-//         <RegisterPlan />
-//       </PrivateRoute>
-//     ),
-//     children: [
-//       {
-//         path: '',
-//         element: <Plans />,
-//       },
-//       {
-//         path: 'summary',
-//         element: <Summary />,
-//       },
-//       { path: '*', element: <NotFound /> },
-//     ],
-//   },
-// ]);
-
-
 const App = () => {
 
   return (

@@ -11,10 +11,12 @@ export default function Router() {
         {
             path: '/',
             element: <Home />,
+            exact: true
         },
         {
             path: '/home',
             element: <Home />,
+            exact: true
         },
         {
             path: '/register-plan',
@@ -27,12 +29,18 @@ export default function Router() {
                 {
                     path: '',
                     element: <Plans />,
+                    exact: true
                 },
                 {
                     path: 'summary',
                     element: <Summary />,
+                    exact: true
                 },
-                { path: '*', element: <NotFound /> },
+                {
+                    path: '*',
+                    element: <NotFound />,
+                    exact: true
+                },
             ],
         },
     ]);

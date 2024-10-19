@@ -4,7 +4,7 @@ import { useUser } from '../context/UserContext';
 
 const PrivateRoute = ({ children }) => {
   const { user } = useUser();  
-  if (!user) {
+  if (!user?.responsable) {
     return <Navigate to="/home" />;
   }
  return children;

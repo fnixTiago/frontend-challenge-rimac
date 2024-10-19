@@ -10,7 +10,7 @@
 DNI: 47206206
 Celular: 973267733
 ```
-## Enalce del RETO
+## Enlace del RETO
 Ingresa al siguiente link: [Reto técnico](http://fnixtiago.github.io/).
 ## Dependencias del Proyecto
 

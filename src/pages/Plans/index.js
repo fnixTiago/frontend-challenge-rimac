@@ -41,7 +41,6 @@ const Index = () => {
 
   const clickOption = (ele) => {
     const us = { info: user?.info, responsable: user.responsable, plan: ele }
-    console.log(us)
     login(us)
     navigate('/register-plan/summary');
   }

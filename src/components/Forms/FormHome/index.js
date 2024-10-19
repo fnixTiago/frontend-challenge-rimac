@@ -25,16 +25,15 @@ const validationSchema = Yup.object().shape({
 });
 
 const Index = () => {
-    const [fetchEnabled, setFetchEnabled] = useState(false);
-    const { isLoading, error, data } = useQuery({
-        queryKey: ['getUser'],
-        queryFn: fetchUser,
-        enabled: fetchEnabled,  // Solo ejecuta la consulta cuando es true
-    });
+
     const navigate = useNavigate();
     const { login } = useUser();
     const [messageError, setMessageError] = useState("")
     const [mydates, setMyDates] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+
     useEffect(() => {
         if (messageError.length > 0) {
             const timer = setTimeout(() => {
@@ -43,12 +42,22 @@ const Index = () => {
             return () => clearTimeout(timer);
         }
     }, [messageError])
-    useEffect(() => {
-        if (data) {
-            login({ info: data, responsable: mydates })
+
+    const getdata = async (infoResponsable) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const data = await fetchUser();
+            const newUser = { info: data, responsable: infoResponsable }
+            login(newUser)
             navigate('/register-plan');
+        } catch (err) {
+            setError('Hubo un error al cargar los datos'); 
+        } finally {
+            setLoading(false);
         }
-    }, [data])
+    }
     return (
         <div className='form'>
             <div className='form__title'>Creado para ti y tu familia</div>
@@ -64,8 +73,7 @@ const Index = () => {
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
                     if (values?.documentNumber === "47206206" && values?.celular == "973267733") {
-                        setMyDates({ document: values?.documentNumber, celular: values?.celular })
-                        setFetchEnabled(true);
+                        getdata({ document: values?.documentNumber, celular: values?.celular });
                     } else {
                         setMessageError("Usuario no registrado. Verifica el celular o documento de identidad.")
                     }
@@ -115,7 +123,7 @@ const Index = () => {
                             <a>Aplican Términos y Condiciones.</a>
                             {messageError && <p className='error'>{messageError}</p>}
                             <Button type='submit' disabled={!(isValid && dirty)}>
-                                {isLoading ? "Cargando..." : "Cotiza aquí"}
+                                {loading ? "Cargando..." : "Cotiza aquí"}
                             </Button>
                             {error && <div>Error al cargar los planes</div>}
                         </div>
