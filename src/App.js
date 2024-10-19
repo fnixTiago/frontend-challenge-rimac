@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import Home from "./pages/Home"
@@ -10,36 +10,37 @@ import RegisterPlan from "./pages/RegisterPlan"
 import PrivateRoute from './Routes/PrivateRoute';
 import { UserProvider } from './context/UserContext';
 import "./styles/index.css"
+import Router from './Routes/Routes';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/home',
-    element: <Home />,
-  },
-  {
-    path: '/register-plan',
-    element: (
-      <PrivateRoute>
-        <RegisterPlan />
-      </PrivateRoute>
-    ),
-    children: [
-      {
-        path: '',
-        element: <Plans />,
-      },
-      {
-        path: 'summary',
-        element: <Summary />,
-      },
-      { path: '*', element: <NotFound /> },
-    ],
-  },
-]);
+// const router = createBrowserRouter([
+//   {
+//     path: '/',
+//     element: <Home />,
+//   },
+//   {
+//     path: '/home',
+//     element: <Home />,
+//   },
+//   {
+//     path: '/register-plan',
+//     element: (
+//       <PrivateRoute>
+//         <RegisterPlan />
+//       </PrivateRoute>
+//     ),
+//     children: [
+//       {
+//         path: '',
+//         element: <Plans />,
+//       },
+//       {
+//         path: 'summary',
+//         element: <Summary />,
+//       },
+//       { path: '*', element: <NotFound /> },
+//     ],
+//   },
+// ]);
 
 
 const App = () => {
@@ -48,7 +49,7 @@ const App = () => {
     <>
       <Header />
       <UserProvider>
-        <RouterProvider router={router} />
+        <Router/>
       </UserProvider>
     </>
   )
